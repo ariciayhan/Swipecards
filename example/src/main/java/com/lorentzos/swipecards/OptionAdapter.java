@@ -37,7 +37,8 @@ public class OptionAdapter extends ArrayAdapter<RedOrBlue> {
             row = inflater.inflate(layoutResourceId, parent, false);
 
             holder = new OptionHolder();
-            //holder.imgIcon = (ImageView)row.findViewById(R.id.imgIcon);
+            holder.img1Icon = (ImageView)row.findViewById(R.id.img1Icon);
+            holder.img1Icon = (ImageView)row.findViewById(R.id.img2Icon);
             holder.txt1Title = (TextView)row.findViewById(R.id.txt1Title);
             holder.txt2Title = (TextView)row.findViewById(R.id.txt2Title);
 
@@ -58,7 +59,8 @@ public class OptionAdapter extends ArrayAdapter<RedOrBlue> {
 
     static class OptionHolder
     {
-        //ImageView imgIcon;
+        ImageView img1Icon;
+        ImageView img2Icon;
         TextView txt1Title;
         TextView txt2Title;
     }
