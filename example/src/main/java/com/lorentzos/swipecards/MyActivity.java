@@ -2,6 +2,7 @@ package com.lorentzos.swipecards;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -21,6 +22,8 @@ public class MyActivity extends Activity {
 
     private ArrayList<String> al;
     private ArrayAdapter<String> arrayAdapter;
+    private ArrayList<RedOrBlue> objs;
+    private OptionAdapter betAdapter;
     private int i;
 
     @InjectView(R.id.frame) SwipeFlingAdapterView flingContainer;
@@ -34,7 +37,7 @@ public class MyActivity extends Activity {
 
 
         al = new ArrayList<>();
-        al.add("php");
+        al.add("asd");
         al.add("c");
         al.add("python");
         al.add("java");
@@ -43,17 +46,47 @@ public class MyActivity extends Activity {
         al.add("css");
         al.add("javascript");
 
+        objs = new ArrayList<RedOrBlue>();
+        RedOrBlue tempObject = new RedOrBlue();
+        tempObject.BlueTitle = "Blue";
+        tempObject.RedTitle = "Red";
+        objs.add(tempObject);
+        tempObject = new RedOrBlue();
+        tempObject.BlueTitle = "Besiktas";
+        tempObject.RedTitle = "Galatasaray";
+        objs.add(tempObject);
+        tempObject = new RedOrBlue();
+        tempObject.BlueTitle = "Barcelona";
+        tempObject.RedTitle = "Sevilla";
+        objs.add(tempObject);
+        tempObject = new RedOrBlue();
+        tempObject.BlueTitle = "FC Bayer";
+        tempObject.RedTitle = "BVB";
+        objs.add(tempObject);
+        tempObject = new RedOrBlue();
+        tempObject.BlueTitle = "Blue SMT";
+        tempObject.RedTitle = "Red SMT";
+        objs.add(tempObject);
+        tempObject = new RedOrBlue();
+        tempObject.BlueTitle = "L";
+        tempObject.RedTitle = "R";
+        objs.add(tempObject);
+        betAdapter = new OptionAdapter(this, R.layout.option_view, objs);
+
         arrayAdapter = new ArrayAdapter<>(this, R.layout.item, R.id.helloText, al );
 
 
-        flingContainer.setAdapter(arrayAdapter);
+        //flingContainer.setAdapter(arrayAdapter);
+        flingContainer.setAdapter(betAdapter);
         flingContainer.setFlingListener(new SwipeFlingAdapterView.onFlingListener() {
             @Override
             public void removeFirstObjectInAdapter() {
                 // this is the simplest way to delete an object from the Adapter (/AdapterView)
                 Log.d("LIST", "removed object!");
-                al.remove(0);
-                arrayAdapter.notifyDataSetChanged();
+                //al.remove(0);
+                objs.remove(0);
+                betAdapter.notifyDataSetChanged();
+                //arrayAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -72,8 +105,13 @@ public class MyActivity extends Activity {
             @Override
             public void onAdapterAboutToEmpty(int itemsInAdapter) {
                 // Ask for more data here
-                al.add("XML ".concat(String.valueOf(i)));
-                arrayAdapter.notifyDataSetChanged();
+                //al.add("XML ".concat(String.valueOf(i)));
+                //arrayAdapter.notifyDataSetChanged();
+                RedOrBlue tempObject = new RedOrBlue();
+                tempObject.RedTitle = "Red".concat(String.valueOf(i));
+                tempObject.BlueTitle = "Blue".concat(String.valueOf(i));
+                objs.add(tempObject);
+                betAdapter.notifyDataSetChanged();
                 Log.d("LIST", "notified");
                 i++;
             }
